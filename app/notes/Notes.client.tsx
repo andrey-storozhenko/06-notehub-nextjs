@@ -39,8 +39,8 @@ export default function NotesClient() {
                 <SearchBox query={searchQuery} updateSearchQuery={updateSearchQuery}></SearchBox>
                 {(data?.totalPages ?? 0) > 1 && <Pagination
                     pageCount={data?.totalPages ?? 0}
-                    currentPage={page}
-                    onPageChange={(newPage) => setPage(newPage)}
+                    currentPage={page - 1}
+                    onPageChange={(newPage) => setPage(newPage + 1)}
                 />}
                
 
