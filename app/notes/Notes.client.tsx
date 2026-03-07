@@ -23,8 +23,8 @@ export default function NotesClient() {
     })
 
     const updateSearchQuery = useDebouncedCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => { 
-            setSearchQuery(e.target.value);
+        (value : string) => { 
+            setSearchQuery(value);
             setPage(1);
         },300
     );
@@ -39,7 +39,7 @@ export default function NotesClient() {
                 <SearchBox query={searchQuery} updateSearchQuery={updateSearchQuery}></SearchBox>
                 {(data?.totalPages ?? 0) > 1 && <Pagination
                     pageCount={data?.totalPages ?? 0}
-                    currentPage={page - 1}
+                    currentPage={page}
                     onPageChange={(newPage) => setPage(newPage)}
                 />}
                
@@ -47,7 +47,7 @@ export default function NotesClient() {
                <button className={css.button} onClick={openModal}>Create note +</button>
             </header>
             {isFetching && <div>Loading notes...</div>}
-            <NoteList notes={data?.notes ?? []}></NoteList>
+            {(data?.notes?.length ?? 0) > 0 && <NoteList notes={data?.notes ?? []}></NoteList>}
             {isModalOpen && <Modal onClose={closeModal}><NoteForm onClose={closeModal}></NoteForm></Modal>}
         </div>
     );

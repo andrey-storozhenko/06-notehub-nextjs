@@ -2,7 +2,7 @@ import css from "./SearchBox.module.css";
 
 interface SearchBoxProps{
     query: string;
-    updateSearchQuery: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    updateSearchQuery: (value: string) => void;
 }
 
 export default function SearchBox({query,updateSearchQuery}:SearchBoxProps) {
@@ -12,7 +12,7 @@ export default function SearchBox({query,updateSearchQuery}:SearchBoxProps) {
             type="text"
             placeholder="Search notes"
             defaultValue={query}
-            onChange={updateSearchQuery}
+            onChange={(e) => updateSearchQuery(e.target.value)}
         />
     );
 }
